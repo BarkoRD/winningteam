@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  username String
+  role     UserRole
+  checks   Factura[]
+}
+
+model Product {
+  id     Int        @id @default(autoincrement())
+  name   String
+  price  Decimal
+  cost   Decimal
+  stock  Int
+  profit Decimal
+  type   ProducType
+
+  checkDetail Detalle_Factura[]
+}
+
+model Factura {
+  id          Int               @id @default(autoincrement())
+  userId      Int
+  date        DateTime          @default(now())
+  total       Decimal
+  offer       Decimal
+  offerReason String?
+  paymentType PaymentType
+  user        User              @relation(fields: [userId], references: [id])
+  detalles    Detalle_Factura[]
+}
+
+model Detalle_Factura {
+  id        Int     @id @default(autoincrement())
+  checkId   Int
+  productId Int
+  quantity  Int
+  subtotal  Decimal
+  check     Factura @relation(fields: [checkId], references: [id])
+  producto  Product @relation(fields: [productId], references: [id])
+}
+
+model Rol {
+  id          Int     @id @default(autoincrement())
+  name        String  @unique
+  description String?
+}
+
+enum UserRole {
+  OWNER
+  EMPLOYEE
+}
+
+enum ProducType {
+  REFRESHMENT
+  VAPE
+  CARWASH
+}
+
+enum PaymentType {
+  CASH
+  CARD
+  TRANSFER
+}
