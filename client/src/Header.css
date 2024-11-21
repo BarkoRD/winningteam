@@ -1,0 +1,40 @@
+header {
+    display: flex;
+    justify-content: space-between;
+
+    .logo{
+      img{
+        height: 55px;
+      }
+    }
+
+    .menus {
+      display: flex;
+      gap: 75px;
+  
+      .menus__button {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+  
+        button{
+            background-color: transparent;
+            border: none;
+
+          img{
+            height: 2.5vw;
+          }
+    
+          p {
+            font-family: "Josefin Sans", sans-serif;
+            font-size: 1vw;
+            font-weight: 600;
+    
+          }
+        }
+      }
+  
+  
+    }
+  }

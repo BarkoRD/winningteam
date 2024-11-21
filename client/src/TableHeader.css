@@ -1,0 +1,117 @@
+.tableheader{
+    border: 2px solid #fff;
+    width: 100%;
+    margin-top: 100px   ;
+    display: flex;
+    border-radius: 20px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom: none;
+    height: 55px;
+    justify-content: space-between;
+    padding-inline: 25px;
+    padding-block: 10px;
+    align-items: center;
+    
+
+    .right{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 125px;
+
+        .container-tableheader__filter {
+            border: 2px solid #fff;
+            padding-inline: 25px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            border-radius: 7px;
+            gap: 25px;
+
+
+            .filter-button{
+                button{
+                    background-color: transparent;
+                    border: none;
+                    display: flex;
+                align-items: center;
+                gap: 7px;
+                font-size: 15px;
+                font-family: "Josefin Sans", sans-serif;
+                font-weight: 600;
+                }
+            }
+        }
+
+
+        .container-tableheader__searchbox {
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            border: 2px solid #fff;
+            border-radius: 30px;
+            width: 300px;
+            padding-right: 10px;
+            
+            img{
+                height: 30px;
+            }
+
+            input{
+                height: 90%;
+                width: 80%;
+                margin-inline: 8px;
+                border: none;
+                background-color: transparent;
+                font-size: 20px;
+                
+
+                &:focus{
+                    border: none;
+                    outline: none;
+                }
+            }
+        }
+
+    }
+
+    .container-tableheader__buttons {
+        display: flex;
+        height: fit-content;
+        gap: 25px;
+
+        .tableheader-button{
+            button{
+            display: flex;
+            align-items: center;
+            background-color: transparent;
+            border: none;
+
+                &:hover{
+                    transform: scale(1.1);
+                    transition: all .2s;
+                }
+                img{
+                    height: 30px;
+                }
+                p{
+                    font-size: 15px;
+                    font-family: "Josefin Sans", sans-serif;
+                    font-weight: 600;
+                }
+            }
+            .imprimirsvg{
+                height: 38px;
+
+            }
+            
+        }
+        
+        
+    }
+
+    
+
+}
