@@ -3,15 +3,15 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id         Int       @id @default(autoincrement())
-  username   String
-  role       UserRole
-  invoices   Invoice[]
+  id       Int       @id @default(autoincrement())
+  username String
+  role     UserRole
+  invoices Invoice[]
 }
 
 model Product {
@@ -35,16 +35,16 @@ model Invoice {
   offerReason String?
   paymentType PaymentType
   user        User              @relation(fields: [userId], references: [id])
-  detail    Detalle_Invoice[]
+  detail      Detalle_Invoice[]
 }
 
 model Detalle_Invoice {
   id        Int     @id @default(autoincrement())
-  invoiceId   Int
+  invoiceId Int
   productId Int
   quantity  Int
   subtotal  Decimal
-  invoice     Invoice @relation(fields: [invoiceId], references: [id])
+  invoice   Invoice @relation(fields: [invoiceId], references: [id])
   producto  Product @relation(fields: [productId], references: [id])
 }
 
