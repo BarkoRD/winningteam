@@ -23,22 +23,22 @@ model Product {
   profit Decimal
   type   ProducType
 
-  invoiceDetail Detalle_Invoice[]
+  invoiceDetail InvoiceDetail[]
 }
 
 model Invoice {
-  id          Int               @id @default(autoincrement())
+  id          Int             @id @default(autoincrement())
   userId      Int
-  date        DateTime          @default(now())
+  date        DateTime        @default(now())
   total       Decimal
   offer       Decimal
   offerReason String?
   paymentType PaymentType
-  user        User              @relation(fields: [userId], references: [id])
-  detail      Detalle_Invoice[]
+  user        User            @relation(fields: [userId], references: [id])
+  detail      InvoiceDetail[]
 }
 
-model Detalle_Invoice {
+model InvoiceDetail {
   id        Int     @id @default(autoincrement())
   invoiceId Int
   productId Int
@@ -46,12 +46,6 @@ model Detalle_Invoice {
   subtotal  Decimal
   invoice   Invoice @relation(fields: [invoiceId], references: [id])
   producto  Product @relation(fields: [productId], references: [id])
-}
-
-model Rol {
-  id          Int     @id @default(autoincrement())
-  name        String  @unique
-  description String?
 }
 
 enum UserRole {

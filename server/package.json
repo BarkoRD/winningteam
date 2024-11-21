@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "dev": "tsx src/index.ts"
+    "dev": "tsx src/index.ts",
+    "seeds": "tsx src/seed/seed.ts"
   },
   "keywords": [],
   "author": "",
