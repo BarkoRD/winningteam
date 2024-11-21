@@ -2,6 +2,8 @@ import React from "react";
 import ButtonWithImage from "./ButtonWithImage";
 import InputTypeRadio from "./InputTypeRadio";
 import { ProductOnForm } from "./ProductOnForm";
+import { productno1 } from "../assets/products"
+
 
 export const CheckInPopup = (visible) => {
   const ex = () => {
@@ -89,7 +91,7 @@ export const CheckInPopup = (visible) => {
           <p className="title">PRODUCTOS</p>
           <input type="text" placeholder="BUSCAR PRODUCTO" />
           <div className="products">
-            <ProductOnForm id="2" name="ceeeee" price={'siiii'} onClick={ex} />
+            <ProductOnForm product={productno1} />
           </div>
         </div>
       </div>

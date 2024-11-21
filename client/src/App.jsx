@@ -5,6 +5,7 @@ import './InvoicesTable.css'
 import './Shortcut.css'
 import './CheckInPopup.css'
 import './InputTypeRadio.css'
+import './ProductOnForm.css'
 
 import Header from './components/Header.jsx'
 import InvoicesTable from './components/InvoicesTable.jsx'
