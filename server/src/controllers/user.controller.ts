@@ -1,5 +1,5 @@
-import { User } from '@prisma/client'
 import { PrismaClient } from '@prisma/client'
+import { User } from '../models/user'
 
 const prisma = new PrismaClient()
 
@@ -14,13 +14,21 @@ export async function getOne(id: number) {
 }
 
 export async function create(user: User) {
-  return await prisma.user.create({ data: user })
+  return await prisma.user.create({
+    data: {
+      role: user.role,
+      username: user.username
+    }
+  })
 }
 
 export async function update(id: number, user: User) {
   return await prisma.user.update({
     where: { id },
-    data: user
+    data: {
+      username: user.username,
+      role: user.role
+    }
   })
 }
 

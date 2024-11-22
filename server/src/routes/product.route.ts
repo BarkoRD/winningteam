@@ -4,7 +4,8 @@ import * as controller from '../controllers/product.controller'
 const productRouter = Router()
 
 productRouter.get('/', async (req, res) => {
-  res.json(await controller.get())
+  const products = await controller.get()
+  products ? res.json(products) : res.status(204).json()
 })
 
 export default productRouter
