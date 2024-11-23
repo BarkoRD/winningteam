@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import * as controller from '../controllers/invoice.controller'
-import { Invoice } from '../models/Invoice'
+import { Invoice } from '../models/invoice'
 
 const invoiceRouter = Router()
 

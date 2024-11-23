@@ -37,7 +37,7 @@ const products: Product[] = [
     profit: new Prisma.Decimal(100),
     price: new Prisma.Decimal(1000),
     cost: new Prisma.Decimal(900),
-    type: ProducType.VAPE
+    type: ProducType.Vaper
   },
   {
     id: 2,
@@ -46,7 +46,7 @@ const products: Product[] = [
     profit: new Prisma.Decimal(200),
     price: new Prisma.Decimal(2000),
     cost: new Prisma.Decimal(1800),
-    type: ProducType.REFRESHMENT
+    type: ProducType.Refrigerio
   }
 ]
 
@@ -56,7 +56,7 @@ const invoices: Invoice[] = [
     userId: 1,
     total: new Prisma.Decimal(1000),
     offer: new Prisma.Decimal(0),
-    paymentType: PaymentType.CARD,
+    paymentType: PaymentType.Tarjeta,
     date: new Date(),
     offerReason: 'No offer'
   },
@@ -65,7 +65,7 @@ const invoices: Invoice[] = [
     userId: 2,
     total: new Prisma.Decimal(2000),
     offer: new Prisma.Decimal(100),
-    paymentType: PaymentType.CASH,
+    paymentType: PaymentType.Efectivo,
     date: new Date(),
     offerReason: 'Employee discount'
   }
@@ -99,8 +99,10 @@ async function seed() {
   await prisma.invoiceDetail.createMany({ data: invoiceDetails })
 }
 
-;(async () => {
-  await seed()
-  console.log('Seed complete')
-  prisma.$disconnect()
-})()
+seed()
+  .then(() => {
+    console.log('Database seeded')
+  })
+  .catch((error) => {
+    console.error(error)
+  })

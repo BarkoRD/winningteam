@@ -1,5 +1,5 @@
 export enum ProductType {
-  REFRESHMENT = 'REFRESHMENT',
-  VAPE = 'VAPE',
-  CARWASH = 'CARWASH'
+  REFRESHMENT = 'Refrigerio',
+  VAPE = 'Vaper',
+  CARWASH = 'Carwash'
 }

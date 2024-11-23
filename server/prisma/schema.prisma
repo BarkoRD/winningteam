@@ -15,14 +15,13 @@ model User {
 }
 
 model Product {
-  id     Int        @id @default(autoincrement())
-  name   String
-  price  Decimal
-  cost   Decimal
-  stock  Int
-  profit Decimal
-  type   ProducType
-
+  id            Int             @id @default(autoincrement())
+  name          String
+  price         Decimal
+  cost          Decimal
+  stock         Int
+  profit        Decimal
+  type          ProducType
   invoiceDetail InvoiceDetail[]
 }
 
@@ -54,13 +53,13 @@ enum UserRole {
 }
 
 enum ProducType {
-  REFRESHMENT
-  VAPE
-  CARWASH
+  Refrigerio
+  Vaper
+  Carwash
 }
 
 enum PaymentType {
-  CASH
-  CARD
-  TRANSFER
+  Efectivo
+  Tarjeta
+  Transferencia
 }

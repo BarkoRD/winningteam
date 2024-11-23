@@ -1,4 +1,4 @@
-import { Invoice } from './Invoice'
+import { Invoice } from './invoice'
 import { Product } from './product'
 
 export interface InvoiceDetail {
