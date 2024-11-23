@@ -1,27 +1,30 @@
 import React, { useState } from "react";
 
-export const ProductOnForm = ({ product, setNewInvoice }) => {
+export const ProductOnForm = ({ product, addProduct, removeProduct }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [incart, setincart] = useState(false);
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
   const [quantity, setQuantity] = useState(0)
+
   const addProducttoInvoice = () => {
     setincart(true)
-    setNewInvoice((invoice) => ({
-      ...invoice,
-      detail: [...invoice.detail, { productId: product.id, quantity: parseInt(quantity), subtotal:product.price * quantity}]
+    addProduct(product, quantity)
+    // setNewInvoice((invoice) => ({
+    //   ...invoice,
+    //   detail: [...invoice.detail, { productId: product.id, quantity: parseInt(quantity), subtotal:product.price * quantity}]
     
-    }));
+    // }));
   };
 
   const removeProducttoInvoice = () => {
     setincart(false)
-    setNewInvoice((invoice) => ({
-      ...invoice,
-      detail: invoice.detail.filter((e)=>e.productId != product.id)
+    removeProduct(product, quantity)
+    // setNewInvoice((invoice) => ({
+    //   ...invoice,
+    //   detail: invoice.detail.filter((e)=>e.productId != product.id)
     
-    }));
+    // }));
   };
 
   return (

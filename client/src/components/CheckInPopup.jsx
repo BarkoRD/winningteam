@@ -3,6 +3,7 @@ import ButtonWithImage from "./ButtonWithImage";
 import InputTypeRadio from "./InputTypeRadio";
 import axios from "axios";
 import { ProductOnForm } from "./ProductOnForm";
+import { useNewInvoice } from "../hooks/useNewInvoice";
 
 export const CheckInPopup = (visible) => {
   const ex = () => {
@@ -10,18 +11,14 @@ export const CheckInPopup = (visible) => {
   };
 
   const [preview, setPreview] = useState(false)
-  const [newInvoice, setNewInvoice] = useState({
-    userId: 1,
-    offer: 0,
-    offerReason: "",
-    paymentType: "CASH",
-    detail: [],
-    total: 0,
-  });
-
-  //   paymentType PaymentType
-  //   user        User            @relation(fields: [userId], references: [id])
-  //   detail      InvoiceDetail[]
+  // const [newInvoice, setNewInvoice] = useState({
+  //   userId: 1,
+  //   offer: 0,
+  //   offerReason: "",
+  //   paymentType: "CASH",
+  //   detail: [],
+  //   total: 0,
+  // });
 
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -32,34 +29,36 @@ export const CheckInPopup = (visible) => {
     getProducts();
   }, []);
 
-  useEffect(() => {
-    setNewInvoice((invoice) => ({
-      ...invoice,
-      total: invoice.detail.reduce((a, b) => a + b.subtotal, 0),
-    }));
-  }, [newInvoice.detail]);
+  // useEffect(() => {
+  //   setNewInvoice((invoice) => ({
+  //     ...invoice,
+  //     total: invoice.detail.reduce((a, b) => a + b.subtotal, 0),
+  //   }));
+  // }, [newInvoice.detail]);
 
-  const updateOffer = (offerValue) => {
-    setNewInvoice((invoice) => ({ ...invoice, offer: parseInt(offerValue) }));
-  };
+  // const updateOffer = (offerValue) => {
+  //   setNewInvoice((invoice) => ({ ...invoice, offer: parseInt(offerValue) }));
+  // };
 
-  const updateOfferReason = (offerReason) => {
-    setNewInvoice((invoice) => ({ ...invoice, offerReason: offerReason }));
-  };
+  // const updateOfferReason = (offerReason) => {
+  //   setNewInvoice((invoice) => ({ ...invoice, offerReason: offerReason }));
+  // };
 
-  const handleTypeOfPaymentChange = (paymentType) => {
-    // const paymentTypes = ["Tarjeta", "Efectivo", "Transferencia"]
+  // const handleTypeOfPaymentChange = (paymentType) => {
+  //   // const paymentTypes = ["Tarjeta", "Efectivo", "Transferencia"]
 
-    // setNewInvoice((invoice) => ({ ...invoice, paymentType: paymentTypes[paymentType] }));
-    console.log('first')
-  };
+  //   // setNewInvoice((invoice) => ({ ...invoice, paymentType: paymentTypes[paymentType] }));
+  //   console.log('first')
+  // };
 
+  const {onInvoiceChange, total, offerReason, offer, addProductToInvoice, removeProductFromInvoice, newInvoice} = useNewInvoice()
   const checkin = async () => {
-    let res = await axios.post('http://localhost:3000/api/invoice',newInvoice)
+    let res = await axios.post('http://localhost:3000/api/invoice', newInvoice)
     console.log(res)
   }
 
-  console.log(newInvoice);
+  // console.log(newInvoice);
+
 
   return (
     <div className="popup-container">
@@ -90,7 +89,10 @@ export const CheckInPopup = (visible) => {
                 type="text"
                 id="discountInput"
                 placeholder="RD$100.00"
-                onChange={(e) => updateOffer(e.target.value)}
+                // onChange={(e) => updateOffer(e.target.value)}
+                name="offer"
+                onChange={onInvoiceChange}
+                value={offer}
               />
               <label htmlFor="discountreason">
                 RAZON DEL DESCUENTO (SI APLICA)
@@ -98,7 +100,10 @@ export const CheckInPopup = (visible) => {
               <textarea
                 id="discountreason"
                 placeholder="Le tenia una deuda pendiente de RD$100"
-                onChange={(e) => updateOfferReason(e.target.value)}
+                // onChange={(e) => updateOfferReason(e.target.value)}
+                name="offerReason"
+                onChange={onInvoiceChange}
+                value={offerReason}
               ></textarea>
             </div>
             <div className="typeofpayment">
@@ -106,19 +111,22 @@ export const CheckInPopup = (visible) => {
                 label="Tarjeta"
                 name="typeofpayment"
                 value="0"
-                onChange={(e) => handleTypeOfPaymentChange(e.target.value)}
+                // onChange={(e) => handleTypeOfPaymentChange(e.target.value)}
+                onChange={onInvoiceChange}
               />
               <InputTypeRadio
                 label="Efectivo"
                 name="typeofpayment"
                 value="1"
-                onChange={(e) => handleTypeOfPaymentChange(e.target.value)}
+                // onChange={(e) => handleTypeOfPaymentChange(e.target.value)}
+                onChange={onInvoiceChange}
               />
               <InputTypeRadio
                 label="Transferencia"
                 name="typeofpayment"
                 value="2"
-                onChange={(e) => handleTypeOfPaymentChange(e.target.value)}
+                // onChange={(e) => handleTypeOfPaymentChange(e.target.value)}
+                onChange={onInvoiceChange}
               />
             </div>
           </div>
@@ -126,11 +134,11 @@ export const CheckInPopup = (visible) => {
             <div className="totals">
               <div className="inputwithou">
                 <label htmlFor="totalwithou">Total sin descuento</label>
-                <input id="totalwithou" type="text" placeholder="RD$300" disabled value={newInvoice.total}/>
+                <input id="totalwithou" type="text" placeholder="RD$300" disabled value={total}/>
               </div>
               <div className="inputwith">
                 <label htmlFor="totalwith">Total con descuento</label>
-                <input id="totalwith" type="text" placeholder="RD$200" disabled value={newInvoice.total - newInvoice.offer>=0 ? newInvoice.total - newInvoice.offer : 0}/>
+                <input id="totalwith" type="text" placeholder="RD$200" disabled value={total - offer >= 0 ? total - offer: 0}/>
               </div>
             </div>
             <label htmlFor="checkinButton">
@@ -150,7 +158,9 @@ export const CheckInPopup = (visible) => {
               <ProductOnForm
                 product={e}
                 key={e.id}
-                setNewInvoice={setNewInvoice}
+                // setNewInvoice={setNewInvoice}
+                addProduct={addProductToInvoice}
+                removeProduct={removeProductFromInvoice}
               />
             ))}
           </div>
