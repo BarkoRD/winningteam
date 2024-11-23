@@ -1,3 +1,11 @@
+.ProductOnForm {
+    background-color: gray;
+    color: black;
+    *{
+        color: black;
+    }
+}
+
 .ProductOnForm.incart{
     background-color: blue;
 }

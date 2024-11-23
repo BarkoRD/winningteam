@@ -18,7 +18,7 @@ import { CheckInPopup } from './components/CheckInPopup.jsx'
 
 
 function App() {
-  const [checkInPopup, setCheckInPopup] = useState(!false)
+  const [checkInPopup, setCheckInPopup] = useState(false)
 
   const onCheckinClick = ()=>{
     setCheckInPopup(true)

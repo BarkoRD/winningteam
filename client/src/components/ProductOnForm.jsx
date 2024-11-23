@@ -1,15 +1,31 @@
 import React, { useState } from "react";
 
-export const ProductOnForm = ({ product }) => {
+export const ProductOnForm = ({ product, setNewInvoice }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [incart, setincart] = useState(false);
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
+  const [quantity, setQuantity] = useState(0)
+  const addProducttoInvoice = () => {
+    setincart(true)
+    setNewInvoice((invoice) => ({
+      ...invoice,
+      detail: [...invoice.detail, { productId: product.id, quantity, subtotal:product.price * quantity}]
+    
+    }));
+  };
 
-
+  const removeProducttoInvoice = () => {
+    setincart(false)
+    setNewInvoice((invoice) => ({
+      ...invoice,
+      detail: invoice.detail.filter((e)=>e.productId != product.id)
+    
+    }));
+  };
 
   return (
-    <button
+    <div
       className={incart ? "ProductOnForm incart" : "ProductOnForm"}
       id={product.id}
       onMouseLeave={handleMouseLeave}
@@ -19,22 +35,23 @@ export const ProductOnForm = ({ product }) => {
       {isHovered && (
         <>
           <div className="productstuff">
-            <input type="number" name="amount" id="amount" />
+            <input type="number" name="amount" id="amount" onChange={(e)=>setQuantity(e.target.value)} />
             <p className="totalofamount">{product.stock}</p>
-           { !incart ? <button className="addtocart" onClick={() => setincart(true)}>ADD</button> : <button className="removefromcart" onClick={() => setincart(false)}>REMOVE</button>}
+            {!incart ? (
+              <button className="addtocart" onClick={addProducttoInvoice}>
+                ADD
+              </button>
+            ) : (
+              <button
+                className="removefromcart"
+                onClick={removeProducttoInvoice}
+              >
+                REMOVE
+              </button>
+            )}
           </div>
         </>
       )}
-    </button>
+    </div>
   );
 };
-
-// const [isHovered, setIsHovered] = useState(false);
-
-// const handleMouseEnter = () => setIsHovered(true);
-// const handleMouseLeave = () => setIsHovered(false);
-
-// return (
-//   <div
-//     onMouseEnter={handleMouseEnter}
-//     onMouseLeave={handleMouseLeave}

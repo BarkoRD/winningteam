@@ -38,7 +38,7 @@ function TableHeader({ onCheckinClick }) {
       </div>
       <div className="container-tableheader__searchbox">
         <input type="text" id="search" />
-        <label htmlFor="search"><img src="lupaicon.svg" alt="" srcset="" /></label>
+        <label htmlFor="search"><img src="lupaicon.svg" alt="" /></label>
       </div>
       </div>
     </div>
