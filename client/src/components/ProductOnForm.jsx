@@ -10,7 +10,7 @@ export const ProductOnForm = ({ product, setNewInvoice }) => {
     setincart(true)
     setNewInvoice((invoice) => ({
       ...invoice,
-      detail: [...invoice.detail, { productId: product.id, quantity, subtotal:product.price * quantity}]
+      detail: [...invoice.detail, { productId: product.id, quantity: parseInt(quantity), subtotal:product.price * quantity}]
     
     }));
   };

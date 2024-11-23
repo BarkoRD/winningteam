@@ -9,8 +9,7 @@ export const CheckInPopup = (visible) => {
     alert("it works");
   };
 
-  const [actualOffer, setActualOffer] = useState(0);
-
+  const [preview, setPreview] = useState(false)
   const [newInvoice, setNewInvoice] = useState({
     userId: 1,
     offer: 0,
@@ -49,11 +48,16 @@ export const CheckInPopup = (visible) => {
   };
 
   const handleTypeOfPaymentChange = (paymentType) => {
-    const paymentTypes = ["Tarjeta", "Efectivo", "Transferencia"]
+    // const paymentTypes = ["Tarjeta", "Efectivo", "Transferencia"]
 
-    setNewInvoice((invoice) => ({ ...invoice, paymentType: paymentTypes[paymentType] }));
-
+    // setNewInvoice((invoice) => ({ ...invoice, paymentType: paymentTypes[paymentType] }));
+    console.log('first')
   };
+
+  const checkin = async () => {
+    let res = await axios.post('http://localhost:3000/api/invoice',newInvoice)
+    console.log(res)
+  }
 
   console.log(newInvoice);
 
@@ -130,7 +134,7 @@ export const CheckInPopup = (visible) => {
               </div>
             </div>
             <label htmlFor="checkinButton">
-              <button id="checkinButton">FACTURAR</button>
+              <button id="checkinButton" onClick={()=>{setPreview((preview)=>!preview)}}>FACTURAR</button> 
             </label>
             <div className="employee">
               <p>Empleado</p>
@@ -138,7 +142,7 @@ export const CheckInPopup = (visible) => {
             </div>
           </div>
         </div>
-        <div className="form-right">
+        {!preview ? <div className="form-right">
           <p className="title">PRODUCTOS</p>
           <input type="text" placeholder="BUSCAR PRODUCTO" />
           <div className="products">
@@ -151,7 +155,19 @@ export const CheckInPopup = (visible) => {
             ))}
           </div>
         </div>
+        : <div className="preview-container">
+          <div className="preview"></div>
+          <label htmlFor="checkinButton">
+              <button id="checkinButton" onClick={checkin}>FACTURAR</button> 
+            </label>
+            <button className="goback" onClick={()=>{setPreview((preview)=>!preview)}}>goback</button>
+        </div> 
+      }
+      
       </div>
     </div>
   );
 };
+
+
+

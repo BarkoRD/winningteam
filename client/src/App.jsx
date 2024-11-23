@@ -1,11 +1,11 @@
-import './App.css'
-import './Header.css'
-import './tableheader.css'
-import './InvoicesTable.css'
-import './Shortcut.css'
-import './CheckInPopup.css'
-import './InputTypeRadio.css'
-import './ProductOnForm.css'
+import './styles/App.css'
+import './styles/Header.css'
+import './styles/tableheader.css'
+import './styles/InvoicesTable.css'
+import './styles/Shortcut.css'
+import './styles/CheckInPopup.css'
+import './styles/InputTypeRadio.css'
+import './styles/ProductOnForm.css'
 
 import Header from './components/Header.jsx'
 import InvoicesTable from './components/InvoicesTable.jsx'
@@ -14,7 +14,6 @@ import TableHeader from './components/TableHeader.jsx'
 
 import { useState } from 'react'
 import { CheckInPopup } from './components/CheckInPopup.jsx'
-
 
 
 function App() {
