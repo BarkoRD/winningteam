@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import * as controller from '../controllers/user.controller'
-import { User } from '@prisma/client'
+import { User } from '../models/user'
 
 const userRouter = Router()
 
